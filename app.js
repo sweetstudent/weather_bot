@@ -27,10 +27,7 @@ bot.onText(/\/start/, (msg, match) => {
   const chatId = msg.chat.id;
   const message ="Привет, отправьте мне геопозицию с помощью кнопки , чтобы узнать подробные данные о погоде в этом месте!";
   bot.sendMessage(chatId, message,option);
-   
-
 });
-
 
 bot.on("location", msg => {
   const lat = msg.location.latitude.toFixed(2);
