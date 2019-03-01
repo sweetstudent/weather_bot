@@ -7,7 +7,7 @@ const request = require("request");
 const option = {
   parse_mode: "Markdown",
   reply_markup: {
-    resize_keyboard: true,
+    resize_keyboard:true,
     keyboard: [
       [
         {
@@ -16,6 +16,7 @@ const option = {
           callback_data: "location"
         }
       ]
+      
     ]
   }
 };
@@ -24,25 +25,25 @@ const bot = new TelegramBot(token, { polling: true });
 
 bot.onText(/\/start/, (msg, match) => {
   const chatId = msg.chat.id;
-  const message =
-    "Привет, отправьте мне геопозицию с помощью кнопки , чтобы узнать подробные данные о погоде в этом месте!";
-  bot.sendMessage(chatId, message,option);
+  const message ="Привет, отправьте мне геопозицию с помощью кнопки , чтобы узнать подробные данные о погоде в этом месте!";
+  bot.sendMessage(chatId, message);
+   
+
 });
 
-bot.on("message", msg => {
+
+bot.on("location", msg => {
+  const lat = msg.location.latitude.toFixed(2);
+  const lon = msg.location.longitude.toFixed(2);
+  const cels = 273;
   const chatId = msg.chat.id;
 
-  bot.once("location", msg => {
-    const lat = msg.location.latitude.toFixed(2);
-    const lon = msg.location.longitude.toFixed(2);
-    const cels = 273;
+  request(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=b9d7db5b1bd38af3d125a21fe14ead1b`,
+    function(error, response, body) {
+      const data = JSON.parse(body);
 
-    request(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=b9d7db5b1bd38af3d125a21fe14ead1b`,
-      function(error, response, body) {
-        const data = JSON.parse(body);
-
-        let ms = `
+      let ms = `
       *Погода в ${data.name}:*
       ${data.weather[0].main}
       Температура: ${(data.main.temp - cels).toFixed(1)}℃
@@ -55,8 +56,7 @@ bot.on("message", msg => {
       Процент облачности: ${data.clouds.all}
       `;
 
-        bot.sendMessage(chatId, ms, option);
-      }
-    );
-  });
+      bot.sendMessage(chatId, ms, option);
+    }
+  );
 });
