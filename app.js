@@ -26,7 +26,7 @@ const bot = new TelegramBot(token, { polling: true });
 bot.onText(/\/start/, (msg, match) => {
   const chatId = msg.chat.id;
   const message ="Привет, отправьте мне геопозицию с помощью кнопки , чтобы узнать подробные данные о погоде в этом месте!";
-  bot.sendMessage(chatId, message);
+  bot.sendMessage(chatId, message,option);
    
 
 });
