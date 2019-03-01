@@ -22,12 +22,17 @@ const option = {
 };
 
 const bot = new TelegramBot(token, { polling: true });
-
 bot.onText(/\/start/, (msg, match) => {
   const chatId = msg.chat.id;
   const message ="Привет, отправьте мне геопозицию с помощью кнопки , чтобы узнать подробные данные о погоде в этом месте!";
   bot.sendMessage(chatId, message,option);
 });
+
+bot.onText(/[^/start]/,msg=>{
+  const id =msg.chat.id;
+  const str = 'Извините, я Вас не понимаю. Просто отправьте мне геопозицию, чтобы узнать подробные данные о погоде в этом месте.'
+  bot.sendMessage(id,str);
+})
 
 bot.on("location", msg => {
   const lat = msg.location.latitude.toFixed(2);
@@ -57,3 +62,4 @@ bot.on("location", msg => {
     }
   );
 });
+
