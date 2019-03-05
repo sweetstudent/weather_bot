@@ -93,7 +93,6 @@ bot.on("message", msg => {
 
             let ms = `
             ${rus.weather} ${data.name}:
-            ${data.weather[0].main}
             ${rus.temp}: ${(data.main.temp - cels).toFixed(1)}℃
             ${rus.pressure}: ${data.main.pressure}
             ${rus.moisture}: ${data.main.humidity}
@@ -129,7 +128,6 @@ bot.on("message", msg => {
 
             let ms = `
             ${eng.weather} ${data.name}:
-            ${data.weather[0].main}
             ${eng.temp}: ${(data.main.temp - cels).toFixed(1)}℃
             ${eng.pressure}: ${data.main.pressure}
             ${eng.moisture}: ${data.main.humidity}
@@ -138,7 +136,7 @@ bot.on("message", msg => {
             ${eng.wind_speed}: ${data.wind.speed}
             ${eng.direction}: ${data.wind.deg}°
             ${eng.сloud_percentage}: ${data.clouds.all}
-            
+
 
             ${rus.err}/
             ${eng.err}
