@@ -8,7 +8,7 @@ const option = {
   parse_mode: "Markdown",
   reply_markup: {
     resize_keyboard: true,
-     keyboard: [
+    keyboard: [
       [
         {
           text: `Русский`,
@@ -26,7 +26,6 @@ const option = {
           callback_data: "location"
         }
       ]
-      
     ]
   }
 };
@@ -34,7 +33,7 @@ const option = {
 const bot = new TelegramBot(token, { polling: true });
 
 const rus = {
-  err:"Выберите язык и отправте геопозицию",
+  err: "Выберите язык и отправте геопозицию",
   weather: "Погода в",
   temp: "Температура",
   pressure: "Давление",
@@ -48,7 +47,7 @@ const rus = {
 };
 
 const eng = {
-  err:"Choose language and send location",
+  err: "Choose language and send location",
   weather: "Weather in",
   temp: "Temperature",
   pressure: "Pressure",
@@ -63,9 +62,10 @@ const eng = {
 
 bot.onText(/\/start/, (msg, match) => {
   const chatId = msg.chat.id;
-  const message =
-    `Привет ${msg.chat.first_name}, *выберите язык* и отправьте мне геопозицию с помощью кнопки , чтобы узнать подробные данные о погоде в этом месте!`;
-  bot.sendMessage(chatId, message,option);
+  const message = `Привет ${
+    msg.chat.first_name
+  }, *выберите язык* и отправьте мне геопозицию с помощью кнопки , чтобы узнать подробные данные о погоде в этом месте!`;
+  bot.sendMessage(chatId, message, option);
 });
 
 bot.onText(/[^/start,Русский,English]/, (msg, match) => {
@@ -83,10 +83,10 @@ bot.on("message", msg => {
       bot.sendMessage(id, "Хорошо");
 
       bot.once("location", msg => {
-            const lat = msg.location.latitude.toFixed(2);
-            const lon = msg.location.longitude.toFixed(2);
-            const cels = 273;
-         request(
+        const lat = msg.location.latitude.toFixed(2);
+        const lon = msg.location.longitude.toFixed(2);
+        const cels = 273;
+        request(
           `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=b9d7db5b1bd38af3d125a21fe14ead1b`,
           function(error, response, body) {
             const data = JSON.parse(body);
@@ -102,17 +102,20 @@ bot.on("message", msg => {
             ${rus.wind_speed}: ${data.wind.speed}
             ${rus.direction}: ${data.wind.deg}°
             ${rus.сloud_percentage}: ${data.clouds.all}
+
+
+            ${rus.err}/
+            ${eng.err}
             `;
 
-            bot.sendMessage(id, ms,option);
-            });
+            bot.sendMessage(id, ms, option);
+          }
+        );
       });
       break;
 
-        case "English":
+    case "English":
       bot.sendMessage(id, "Ok");
-
-     
 
       bot.once("location", msg => {
         const lat = msg.location.latitude.toFixed(2);
@@ -135,11 +138,15 @@ bot.on("message", msg => {
             ${eng.wind_speed}: ${data.wind.speed}
             ${eng.direction}: ${data.wind.deg}°
             ${eng.сloud_percentage}: ${data.clouds.all}
+            
+
+            ${rus.err}/
+            ${eng.err}
             `;
-            bot.sendMessage(id, ms,option);
-        });
+            bot.sendMessage(id, ms, option);
+          }
+        );
       });
       break;
-    }
+  }
 });
-
