@@ -23,7 +23,7 @@ const option = {
       ],
       [
         {
-          text: "Отправить геопозицию",
+          text: "Отправить геопозицию/ Send location",
           request_location: true,
           callback_data: "location"
         }
