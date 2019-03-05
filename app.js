@@ -106,7 +106,7 @@ bot.on("message", msg => {
             ${rus.сloud_percentage}: ${data.clouds.all}
 
 
-            ${rus.err}/${eng.err}
+            *${rus.err}/${eng.err}*
             
             `;
 
