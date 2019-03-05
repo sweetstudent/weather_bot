@@ -130,7 +130,7 @@ bot.on("message", msg => {
             const data = JSON.parse(body);
 
             let ms = `
-            ${eng.weather} ${data.name}:
+            ${emoji.cloud}${eng.weather} ${data.name}:
 
             ${eng.temp}: ${(data.main.temp - cels).toFixed(1)}℃
             ${eng.pressure}: ${data.main.pressure}
