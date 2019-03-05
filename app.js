@@ -106,7 +106,7 @@ bot.on("message", msg => {
             ${rus.сloud_percentage}: ${data.clouds.all}
 
 
-            *${rus.err}/${eng.err}*
+            ${rus.err}/${eng.err}
             
             `;
 
@@ -142,7 +142,7 @@ bot.on("message", msg => {
             ${eng.сloud_percentage}: ${data.clouds.all}
 
 
-            *${rus.err}/${eng.err}*
+            ${rus.err}/${eng.err}
             
             `;
             bot.sendMessage(id, ms, option);
