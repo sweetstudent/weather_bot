@@ -2,6 +2,8 @@ const TelegramBot = require("node-telegram-bot-api");
 
 const token = "749384960:AAHyC5iIwpjncO9tYl-cL2uVXJf7roi3dco";
 
+const emoji = require('node-emoji').emoji;
+
 const request = require("request");
 
 const option = {
@@ -92,7 +94,7 @@ bot.on("message", msg => {
             const data = JSON.parse(body);
 
             let ms = `
-            ${rus.weather} ${data.name}:
+            ${emoji.cloud}${rus.weather} ${data.name}:
 
             ${rus.temp}: ${(data.main.temp - cels).toFixed(1)}℃
             ${rus.pressure}: ${data.main.pressure}
