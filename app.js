@@ -35,7 +35,7 @@ const option = {
 const bot = new TelegramBot(token, { polling: true });
 
 const rus = {
-  err: "Выберите язык и отправте геопозицию",
+  err: "Выберите язык и отправьте геопозицию",
   weather: "Погода в",
   temp: "Температура",
   pressure: "Давление",
